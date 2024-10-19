@@ -1,0 +1,32 @@
+name: Move to 1st
+
+on:
+  schedule:
+    - cron: "0 2 * * 2" # 2 AM UTC every Tuesday
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  send_post_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Log runner's IP address
+        run: curl https://ifconfig.me
+
+      - name: Move Youths
+        env:
+          DO_USER: ${{ secrets.DO_USER }}
+          DO_PASS: ${{ secrets.DO_PASS }}
+          COOKIE: ${{ secrets.COOKIE }}
+          PAYLOAD: ${{ vars.MOVE_TO_FIRST }}
+        run: node scripts/moveplayers.js
