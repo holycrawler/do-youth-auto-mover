@@ -1,5 +1,8 @@
 import axios from "axios";
-const PLAYERS = [13457797, 13640707, 13729087, 13729439, 13725354]; // players ids to move
+const PLAYERS = [
+  13640706, 13725355, 13725356, 13725353, 13560293, 13560295, 13728657,
+  13643723,
+]; // players ids to move
 
 const login = async () => {
   const url = "https://www.dugout-online.com/";
